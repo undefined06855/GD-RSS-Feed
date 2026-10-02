@@ -5,7 +5,7 @@ html, body {
 
 body {
     background-color: #272737;
-    color: #5b5b75;
+    color: #acacc7;
 
     display: flex;
     justify-content: center;
@@ -26,7 +26,17 @@ body {
 
         a {
             display: inline-block;
-            width: 50px;
+            width: 60px;
+
+            text-align: center;
+            font-family: "Clarity City", sans-serif;
+            text-decoration: none;
+            color: #cbcbeb;
+            font-size: 16px;
+
+            &:hover {
+                text-decoration: underline;
+            }
 
             img {
                 max-width: 100%;
