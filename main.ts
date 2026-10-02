@@ -33,6 +33,7 @@ async function fetchNews() {
         },
         author: { name: "RobTop" },
         favicon: `${process.env.RSS_ENDPOINT}/gd-logo.png`,
+        image: `${process.env.RSS_ENDPOINT}/gd-logo.png`,
         category: "Gaming" // rss has no defined category names so maybe this is good?
     });
 
