@@ -19,7 +19,7 @@ async function fetchNews() {
     feed = new Feed({
         id: process.env.RSS_ENDPOINT,
         title: "Geometry Dash News",
-        description: `A feed taken from the 2.209 News button in the bottom right. Re-fetches from GD servers every ${process.env.FETCH_INTERVAL} minutes.`,
+        description: `A feed taken from the 2.209 News button endpoint. Re-fetches from GD servers every ${process.env.FETCH_INTERVAL} minutes.`,
         generator: "https://github.com/undefined06855/GD-RSS-Feed",
         language: "en",
 
@@ -47,7 +47,7 @@ async function fetchNews() {
         feed.addItem({
             title: entry.title,
             id: entry.index.toString(),
-            link: entry.body.image?.link ?? `${process.env.RSS_ENDPOINT}/#no-page`,
+            link: entry.body.image?.link ?? entry.body.image?.imageUrl ?? `${process.env.RSS_ENDPOINT}/#no-page`,
             date: entry.date,
             content: entry.body.content,
             image: entry.body.image?.imageUrl,
