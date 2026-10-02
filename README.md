@@ -6,6 +6,7 @@ To setup, clone this repository, create a `.env` file with the following set:
 ```env
 RSS_ENDPOINT=https://gd-news.undefined0.dev     # URL of your site without the trailing slash
 FETCH_INTERVAL=30                               # How often to fetch from GD servers
+PORT=8080
 ```
 ...run `bun i` to install dependencies and `bun main` to start.
 

@@ -1,4 +1,12 @@
 import { Result } from "result-js";
+import { EmojiConvertor as EmojiConverter } from "emoji-js";
+
+var emoji = new EmojiConverter();
+emoji.replace_mode = "unified";
+
+function decodeBase64Url(url: string): string {
+    return atob(url.replaceAll("+", "-").replaceAll("_", "/"));
+}
 
 export class NewsImage {
     imageUrl: string = `${process.env.RSS_ENDPOINT}/no-image.png`;
@@ -16,11 +24,11 @@ export class NewsImage {
             return Result.err(`invalid news image chunk data length ${chunks.length}`);
         }
 
-        ret.imageUrl = chunks[0]!;
+        ret.imageUrl = `https://geometrydashfiles.b-cdn.net/news/${chunks[0]!}`;
         ret.width = parseInt(chunks[1]!);
         ret.height = parseInt(chunks[2]!);
         ret.unknown = parseInt(chunks[3]!);
-        ret.link = chunks[4];
+        ret.link = chunks[4] ? decodeBase64Url(chunks[4]) : undefined;
 
         return Result.ok(ret);
     }
@@ -46,7 +54,7 @@ export class NewsBody {
             let type = parseInt(id);
             switch (type) {
                 case 0: {
-                    ret.content = atob(contents);
+                    ret.content = emoji.replace_colons(decodeBase64Url(contents));
                 } break;
 
                 case 1: {
@@ -87,11 +95,11 @@ export class NewsEntry {
                 } break;
 
                 case 2: {
-                    ret.date = new Date(atob(contents));
+                    ret.date = new Date(decodeBase64Url(contents));
                 } break;
 
                 case 3: {
-                    ret.title = atob(contents);
+                    ret.title = emoji.replace_colons(decodeBase64Url(contents));
                 } break;
 
                 case 4: {

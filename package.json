@@ -10,6 +10,8 @@
     "typescript": "^7"
   },
   "dependencies": {
+    "@types/emoji-js": "^3.5.2",
+    "emoji-js": "^3.9.0",
     "feed": "^6.0.0",
     "result-js": "git+https://fj.undefined0.dev/undefined0/result-js.git"
   }

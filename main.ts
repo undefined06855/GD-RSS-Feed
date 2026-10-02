@@ -46,7 +46,7 @@ async function fetchNews() {
         feed.addItem({
             title: entry.title,
             id: entry.index.toString(),
-            link: "steam://run/322170",
+            link: entry.body.image?.link ?? "",
             date: entry.date,
             content: entry.body.content,
             image: entry.body.image?.imageUrl,
