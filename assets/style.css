@@ -1,0 +1,36 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+body {
+    background-color: #272737;
+    color: #5b5b75;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+        font-family: "Ultra", sans-serif;
+        font-size: 60px;
+        margin: 20px;
+    }
+
+    #links {
+        display: flex;
+        flex-direction: row;
+
+        gap: 30px;
+
+        a {
+            display: inline-block;
+            width: 50px;
+
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+}

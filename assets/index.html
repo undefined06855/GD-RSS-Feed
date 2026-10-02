@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>GD News Feed</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Ultra&display=swap" rel="stylesheet" />
+
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>GD News RSS Feed</h1>
+
+        <div id="links">
+            <a href="/feed">
+                <img src="rss.svg" alt="RSS Logo">
+            </a>
+
+            <a href="/json">
+                <img src="json.svg" alt="JSON Logo">
+            </a>
+
+            <a href="https://github.com/undefined06855/GD-RSS-Feed">
+                <img src="github.svg" alt="GitHub Logo">
+            </a>
+        </div>
+
+        <script>
+            if (window.location.hash == "#no-page") {
+                document.querySelector("h1").innerText = "No Page!";
+            }
+        </script>
+    </body>
+</html>

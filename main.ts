@@ -28,7 +28,7 @@ async function fetchNews() {
         link: process.env.RSS_ENDPOINT,
         feedLinks: {
             json: `${process.env.RSS_ENDPOINT}/json`,
-            // atom: `${process.env.RSS_ENDPOINT}/atom`,
+            atom: `${process.env.RSS_ENDPOINT}/atom`,
             rss: `${process.env.RSS_ENDPOINT}/feed`
         },
         author: { name: "RobTop" },
@@ -46,8 +46,8 @@ async function fetchNews() {
     for (let entry of news) {
         feed.addItem({
             title: entry.title,
-            guid: entry.index.toString(),
-            link: entry.body.image?.link ?? "",
+            id: entry.index.toString(),
+            link: entry.body.image?.link ?? `${process.env.RSS_ENDPOINT}/#no-page`,
             date: entry.date,
             content: entry.body.content,
             image: entry.body.image?.imageUrl,
@@ -59,7 +59,6 @@ async function fetchNews() {
 Bun.cron(`*/${process.env.FETCH_INTERVAL} * * * *`, fetchNews);
 await fetchNews();
 
-
 let server = Bun.serve({
     routes: {
         "/gd-logo.png": Bun.file("./gd-logo.png"),
@@ -67,7 +66,13 @@ let server = Bun.serve({
         "/feed": () => { return new Response(feed?.rss2() ?? error, { headers: { "Content-Type": "application/xml" } }); },
         "/rss": () => { return new Response(feed?.rss2() ?? error, { headers: { "Content-Type": "application/xml" } }); },
         "/json": () => { return new Response(feed?.json1() ?? error, { headers: { "Content-Type": "application/json" } }); },
-        // "/atom": () => { return new Response(feed?.atom1() ?? error); },
+        "/atom": () => { return new Response(feed?.atom1() ?? error, { headers: { "Content-Type": "application/xml" } }); },
+
+        "/": Bun.file("./assets/index.html"),
+        "/:file": req => {
+            let file = Bun.file(`./assets/${req.params.file}`);
+            return new Response(file, { headers: { "Content-Type": file.type } });
+        }
     }
 });
 
