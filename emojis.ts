@@ -1,6 +1,6 @@
 export default class GDEmojis {
     static emojiMap: Record<string, string> = {
-        ":party:": "🎉",
+        ":party:": "🥳",
         ":eyes:": "👀",
     };
 
