@@ -45,7 +45,7 @@ async function fetchNews() {
     for (let entry of news) {
         feed.addItem({
             title: entry.title,
-            id: entry.index.toString(),
+            guid: entry.index.toString(),
             link: entry.body.image?.link ?? "",
             date: entry.date,
             content: entry.body.content,
@@ -63,8 +63,8 @@ let server = Bun.serve({
     routes: {
         "/gd-logo.png": Bun.file("./gd-logo.png"),
 
-        "/feed": () => { return new Response(feed?.rss2() ?? error); },
-        "/rss": () => { return new Response(feed?.rss2() ?? error); },
+        "/feed": () => { return new Response(feed?.rss2() ?? error, { headers: { "Content-Type": "application/xml" } }); },
+        "/rss": () => { return new Response(feed?.rss2() ?? error, { headers: { "Content-Type": "application/xml" } }); },
         "/json": () => { return new Response(feed?.json1() ?? error); },
         "/atom": () => { return new Response(feed?.atom1() ?? error); },
     }

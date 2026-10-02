@@ -1,8 +1,5 @@
 import { Result } from "result-js";
-import { EmojiConvertor as EmojiConverter } from "emoji-js";
-
-var emoji = new EmojiConverter();
-emoji.replace_mode = "unified";
+import GDEmojis from "./emojis";
 
 function decodeBase64Url(url: string): string {
     return atob(url.replaceAll("+", "-").replaceAll("_", "/"));
@@ -54,7 +51,7 @@ export class NewsBody {
             let type = parseInt(id);
             switch (type) {
                 case 0: {
-                    ret.content = emoji.replace_colons(decodeBase64Url(contents));
+                    ret.content = GDEmojis.replace(decodeBase64Url(contents));
                 } break;
 
                 case 1: {
@@ -99,7 +96,7 @@ export class NewsEntry {
                 } break;
 
                 case 3: {
-                    ret.title = emoji.replace_colons(decodeBase64Url(contents));
+                    ret.title = GDEmojis.replace(decodeBase64Url(contents));
                 } break;
 
                 case 4: {
