@@ -28,7 +28,7 @@ async function fetchNews() {
         link: process.env.RSS_ENDPOINT,
         feedLinks: {
             json: `${process.env.RSS_ENDPOINT}/json`,
-            atom: `${process.env.RSS_ENDPOINT}/atom`,
+            // atom: `${process.env.RSS_ENDPOINT}/atom`,
             rss: `${process.env.RSS_ENDPOINT}/feed`
         },
         author: { name: "RobTop" },
@@ -65,8 +65,8 @@ let server = Bun.serve({
 
         "/feed": () => { return new Response(feed?.rss2() ?? error, { headers: { "Content-Type": "application/xml" } }); },
         "/rss": () => { return new Response(feed?.rss2() ?? error, { headers: { "Content-Type": "application/xml" } }); },
-        "/json": () => { return new Response(feed?.json1() ?? error); },
-        "/atom": () => { return new Response(feed?.atom1() ?? error); },
+        "/json": () => { return new Response(feed?.json1() ?? error, { headers: { "Content-Type": "application/json" } }); },
+        // "/atom": () => { return new Response(feed?.atom1() ?? error); },
     }
 });
 
