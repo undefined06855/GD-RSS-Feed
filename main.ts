@@ -46,7 +46,7 @@ async function fetchNews() {
     for (let entry of news) {
         feed.addItem({
             title: entry.title,
-            id: entry.index.toString(),
+            id: `${process.env.RSS_ENDPOINT}/#post-${entry.index.toString()}`,
             link: entry.body.image?.link ?? entry.body.image?.imageUrl ?? `${process.env.RSS_ENDPOINT}/#no-page`,
             date: entry.date,
             content: entry.body.content,
