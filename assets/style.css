@@ -16,13 +16,16 @@ body {
         font-family: "Ultra", sans-serif;
         font-size: 60px;
         margin: 20px;
+        text-align: center;
     }
 
     #links {
         display: flex;
         flex-direction: row;
-
+        flex-wrap: wrap;
         gap: 30px;
+        justify-content: center;
+        padding: 20px;
 
         a {
             display: inline-block;
